@@ -15,14 +15,14 @@ export default function Sidebar({ initialMenuItems }) {
   // "menuItems" that holds the set of current menu items.
 
   let addMenuItem = useCallback(() => {
-    console.log("Added menu item")
     //   // TODO: 3. Add a new menu item to the correct variable associated with this class.
     //   // This involves adding a parameter and changing a class instance variable (props).
     //   setMenuItems([item, ...menuItems])
 
     if (newMenuItem.trim()) {  // Only add if there's actual content
       setMenuItems([...menuItems, newMenuItem])
-      setNewMenuItem("")  // Clear the input after adding
+      setNewMenuItem("")  
+      // Clear the input after adding
       console.log("Added menu item:", newMenuItem)
       console.log(menuItems)
     }
@@ -44,11 +44,14 @@ export default function Sidebar({ initialMenuItems }) {
     <div>
       <ul 
         id = "listDisplay"
-        value = {initialMenuItems}
       >
-        {menuItems.map((item, index) => (
-          <li key={index}>{item}</li>
-        ))}
+        {filter === "" 
+          ? menuItems.map((item, index) => <li key={index}>{item}</li>)
+          : menuItems
+            //.filter(item => item.toLowerCase().includes(filter.toLowerCase())) does the same thing without regex.
+            .filter(item => new RegExp(filter, 'i').test(item))
+            .map((item, index) => <li key={index}>{item}</li>)
+        }
       </ul>
       <input
         type="text"
@@ -60,6 +63,7 @@ export default function Sidebar({ initialMenuItems }) {
       <button
         onClick={() => {
           /* TODO: 3 */
+          //runs this function
           addMenuItem()
         }}
       >

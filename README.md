@@ -1,8 +1,8 @@
-## Overview
+# Overview
 
 A React component that displays a filterable list of menu items. Users can add new items and filter the existing items using a search bar with case-insensitive regex matching.
 
-## Features
+# Features
 
 - Display a list of menu items
 - Add new items to the list
@@ -25,16 +25,16 @@ Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 The page will reload when you make changes.\
 You may also see any lint errors in the console.
 
-## Component Structure
+# Component Structure
 
-### State Management
+## State Management
 
 The component uses three state hooks:
 - `newMenuItem`: Manages the input field for adding new items
 - `menuItems`: Stores the array of all menu items
 - `filter`: Manages the search/filter input value
 
-### Key Functions
+## Key Functions
 
 - `addMenuItem`: Callback function that adds new items to the list
   - Takes an item parameter
@@ -42,14 +42,14 @@ The component uses three state hooks:
   - Adds valid items to the menuItems array
   - Dependencies tracked via useCallback
 
-### Filtering
+## Filtering
 
 - Case-insensitive filtering using RegExp
 - Shows all items when filter is empty
 - Shows only matching items when filter has content
 - Uses pattern: `new RegExp(filter, 'i').test(item)`
 
-### User Interface
+## User Interface
 
 The component renders:
 
@@ -58,7 +58,7 @@ The component renders:
 - An "Add Item" button
 - A filter/search input field
 
-## Dependencies
+# Dependencies
 
 - create-react-app
 

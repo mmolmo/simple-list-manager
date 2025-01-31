@@ -14,19 +14,20 @@ export default function Sidebar({ initialMenuItems }) {
   // Adds a single string passed in as parameter to the state element
   // "menuItems" that holds the set of current menu items.
 
-  let addMenuItem = useCallback(() => {
+  let addMenuItem = useCallback((item) => {
     //   // TODO: 3. Add a new menu item to the correct variable associated with this class.
     //   // This involves adding a parameter and changing a class instance variable (props).
-    //   setMenuItems([item, ...menuItems])
+    //   setMenuItems([item, ...menuItems]) 
 
-    if (newMenuItem.trim()) {  // Only add if there's actual content
-      setMenuItems([...menuItems, newMenuItem])
-      setNewMenuItem("")  
-      // Clear the input after adding
+    // Only add if there's actual content
+    if (item.trim()) { 
+      // Add the new menu item to menuItems array state copy
+      setMenuItems([...menuItems, item])
+      //console logs
       console.log("Added menu item:", newMenuItem)
       console.log(menuItems)
     }
-  }, [newMenuItem, menuItems])
+  }, [menuItems])
 
   // TODO: 4. Display ONLY the menu items that contain the filter element value
   // "term" in them. Each menu item should be an unordered list item wrapped in an unordered list (ul) element.
@@ -34,19 +35,15 @@ export default function Sidebar({ initialMenuItems }) {
   // TODO: 1 Render inside the outer div an unordered list of the menu items, with each string in the array
   // its own item.
 
-  //setArtists(
-  //  artists.filter(a =>
-  //    a.id !== artist.id
-  //  )
-  //);
-
   return (
     <div>
       <ul 
         id = "listDisplay"
       >
         {filter === "" 
+          // if filter is empty, display all menu items
           ? menuItems.map((item, index) => <li key={index}>{item}</li>)
+          // if filter is not empty, display only menu items that contain the filter term
           : menuItems
             //.filter(item => item.toLowerCase().includes(filter.toLowerCase())) does the same thing without regex.
             .filter(item => new RegExp(filter, 'i').test(item))
@@ -63,8 +60,10 @@ export default function Sidebar({ initialMenuItems }) {
       <button
         onClick={() => {
           /* TODO: 3 */
-          //runs this function
-          addMenuItem()
+          //runs this function to add the new menu item
+          addMenuItem(newMenuItem)
+          //clear the input field
+          setNewMenuItem("")
         }}
       >
         Add Item
